@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Alert;
 use Illuminate\Http\Request;
 
 class AlertController extends Controller{
     public function index(){
-        return "Hello, World.";
+        $alerts = Alert::all();
+
+        return view('alerts/index', [
+            'alerts' => $alerts,
+        ]);
     }
 }
