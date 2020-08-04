@@ -22,7 +22,7 @@ class CreateAlertsTable extends Migration
             $table->integer('user_id');
             $table->time('first_alert_timing');
             $table->boolean('second_alert_flag');
-            $table->time('second_alert_timing');
+            $table->time('second_alert_timing')->nullable();
             $table->timestamps();
         });
     }

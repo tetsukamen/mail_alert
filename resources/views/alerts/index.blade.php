@@ -18,7 +18,7 @@
     <nav class="panel panel-default">
       <div class="panel-heading">予定</div>
       <div class="panel-body">
-        <a href="#" class="btn btn-default btn-block">
+        <a href="{{route('alert.create')}}" class="btn btn-default btn-block">
           予定を追加する
         </a>
       </div>

@@ -14,3 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/alert','AlertController@index')->name('alert.index') ;
+
+Route::get('/alert/create', 'AlertController@showCreateForm')->name('alert.create');
+Route::post('/alert/create', 'AlertController@create');
