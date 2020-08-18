@@ -32,6 +32,7 @@
             <th>2回目のメールを送るかどうか</th>
             <th>2回目のメールを送るタイミング</th>
             <th>一回に送るメールの数</th>
+            <th>鳴らさない日</th>
             <th></th>
             <th></th>
           </thead>
@@ -45,6 +46,7 @@
               <td>{{ $alert->second_alert_flag }}</td>
               <td>{{ $alert->second_alert_timing }}</td>
               <td>{{ $alert->email_amount }}</td>
+              <td>{{ $alert->mute_dates()->get() }}</td>
               <td><a href="">編集</a></td>
               <td><a href="">削除</a></td>
             </tr>
