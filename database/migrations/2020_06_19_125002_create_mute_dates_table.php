@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlertMuteDateTable extends Migration
+class CreateMuteDatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateAlertMuteDateTable extends Migration
      */
     public function up()
     {
-        Schema::create('alert_mute_date', function (Blueprint $table) {
+        Schema::create('mute_dates', function (Blueprint $table) {
             $table->id();
-            $table->integer('alert_id');
-            $table->integer('mute_date_id');
+            $table->date('mute_date');
+            $table->bigInteger('alert_id')->unsigned();
             $table->timestamps();
+            $table->foreign('alert_id')->references('id')->on('alerts');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateAlertMuteDateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alert_mute_date');
+        Schema::dropIfExists('mute_dates');
     }
 }

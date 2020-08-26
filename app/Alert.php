@@ -10,7 +10,9 @@ class Alert extends Model
         'second_alert_flag' => 'boolean',
     ];
 
-    public function mute_dates(){
-        return $this->belongsToMany('App\MuteDate');
+    public function mute_dates()
+    {
+        return $this->hasMany(MuteDate::class);
     }
+
 }
