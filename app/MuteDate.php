@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MuteDate extends Model
 {
+    protected $dates = ['mute_date'];
+
     public function alert()
     {
         return $this->belongsTo(Alert::class);

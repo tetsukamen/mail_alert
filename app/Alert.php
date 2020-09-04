@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alert extends Model
 {
-    protected $casts = [
-        'second_alert_flag' => 'boolean',
-    ];
+    protected $dates = ['date','time','first_alert_timing','second_alert_timing'];
 
     public function mute_dates()
     {

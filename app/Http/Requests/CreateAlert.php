@@ -29,7 +29,7 @@ class CreateAlert extends FormRequest
             'time' => 'required|date_format:"H:i"',
             'email_amount' => 'required|digits_between:1,10',
             'first_alert_timing' => 'required|date_format:"H:i"',
-            'second_alert_flag' => 'required|boolean',
+            'second_alert_flag' => 'boolean',
             'second_alert_timing' => 'nullable|date_format:"H:i"'
         ];
     }
@@ -61,7 +61,6 @@ class CreateAlert extends FormRequest
             'email_amount.digits_between' => ':attribute は1から10までの整数を入力してください。',
             'first_alert_timing.required' => ':attribute は入力必須です。',
             'first_alert_timing.date_format' => ':attribute は入力形式が無効です。',
-            'second_alert_flag.required' => ':attribute は入力必須です。',
             'second_alert_flag.boolean' => ':attribute は入力形式が無効です。',
             'second_alert_timing.date_format' => ':attribute は入力形式が無効です。',
         ];

@@ -64,6 +64,10 @@
                 <label for="second_alert_timing">２回目のメールを送るタイミング</label>
                 <input type="text" class="form-control" name="second_alert_timing" id="second_alert_timing" />
               </div>
+              <div class="form-group">
+                <label for="mute_date">鳴らさない日</label>
+                <input type="text" class="form-control" name="mute_date" id="mute_date" />
+              </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">送信</button>
               </div>

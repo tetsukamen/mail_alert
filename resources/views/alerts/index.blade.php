@@ -40,13 +40,17 @@
             @foreach($alerts as $alert)
             <tr>
               <td>{{ $alert->name }}</td>
-              <td>{{ $alert->date }}</td>
-              <td>{{ $alert->time }}</td>
-              <td>{{ $alert->first_alert_timing }}</td>
-              <td>{{ $alert->second_alert_flag }}</td>
-              <td>{{ $alert->second_alert_timing }}</td>
-              <td>{{ $alert->email_amount }}</td>
-              <td>{{ $alert->mute_dates()->get() }}</td>
+              <td>{{ $alert->date->format('Y年m月d日') }}</td>
+              <td>{{ $alert->time->format('G:i') }}</td>
+              <td>{{ $alert->first_alert_timing->format('G時i分前') }}</td>
+              <td>{{ $alert->second_alert_flag ? "はい":"いいえ" }}</td>
+              <td>{{ $alert->second_alert_timing ? $alert->second_alert_timing->format('G時i分前'):"" }}</td>
+              <td>{{ $alert->email_amount }}回</td>
+              <td>
+              @foreach($alert->mute_dates()->get() as $mute_date)
+                {{ $mute_date->mute_date->format('Y年m月d日') }}<br>
+              @endforeach
+              </td>
               <td><a href="">編集</a></td>
               <td><a href="">削除</a></td>
             </tr>
