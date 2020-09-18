@@ -24,7 +24,6 @@ class AlertController extends Controller{
         $alert = new Alert();
         
         $alert->name = $request->name;
-        $alert->date = $request->date;
         $alert->time = $request->time;
         $alert->email_amount = $request->email_amount;
         $alert->user_id = 1;
@@ -32,8 +31,20 @@ class AlertController extends Controller{
         $alert->second_alert_flag = $request->has('second_alert_flag');
         $alert->second_alert_timing = $request->second_alert_timing;
 
+        $type = $request->type;
+        if($type=='date'){
+            $alert->date_or_type = $request->date;
+        } elseif($type=='everyday'){
+            $alert->date_or_type = 'everyday';
+        } elseif($type=='day_of_week'){
+            $alert->date_or_type = 'DayOfWeek';
+        };
+
         $alert->save();
 
-        return redirect()->route('alert.index');
+        // return redirect()->route('alert.index');
+        return view('alerts/test', [
+            'request' => $request->date,
+        ]); 
     }
 }

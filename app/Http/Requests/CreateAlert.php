@@ -25,7 +25,7 @@ class CreateAlert extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            'date' => 'required|date|after_or_equal:today',
+            'date' => 'required',
             'time' => 'required|date_format:"H:i"',
             'email_amount' => 'required|digits_between:1,10',
             'first_alert_timing' => 'required|date_format:"H:i"',

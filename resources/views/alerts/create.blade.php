@@ -38,8 +38,35 @@
                 <input type="text" class="form-control" name="name" id="name" />
               </div>
               <div class="form-group">
+                <label for="type">予定種別</label>
+                <select class="form-control" name="type" id="type">
+                  <option value="date">日付</option>
+                  <option value="everyday">毎日</option>
+                  <option value="day_of_week">曜日</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="date">予定日付</label>
                 <input type="text" class="form-control" name="date" id="date" />
+              </div>
+              <div class="form-group">
+                <label for="date">曜日</label>
+                <div class="d-flex">
+                  <label for="week_mon">月</label>
+                  <input type="checkbox" class="form-control" name="week_mon" id="week_mon" value="1" />
+                  <label for="week_tue">火</label>
+                  <input type="checkbox" class="form-control" name="week_tue" id="week_tue" value="1" />
+                  <label for="week_wed">水</label>
+                  <input type="checkbox" class="form-control" name="week_wed" id="week_wed" value="1" />
+                  <label for="week_thu">木</label>
+                  <input type="checkbox" class="form-control" name="week_thu" id="week_thu" value="1" />
+                  <label for="week_fri">金</label>
+                  <input type="checkbox" class="form-control" name="week_fri" id="week_fri" value="1" />
+                  <label for="week_sat">土</label>
+                  <input type="checkbox" class="form-control" name="week_sat" id="week_sat" value="1" />
+                  <label for="week_sun">日</label>
+                  <input type="checkbox" class="form-control" name="week_sun" id="week_sun" value="1" />
+                </div>
               </div>
               <div class="form-group">
                 <label for="time">予定時刻</label>
@@ -117,6 +144,11 @@
       defaultMinute: 30, // 初期設定の時間（min）
       minDate: "0:00", // 時間の下限
       maxDate: "23:59" // 時間の上限
+  });
+  flatpickr(document.getElementById('mute_date'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
   });
 </script>
 </body>

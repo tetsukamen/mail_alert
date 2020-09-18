@@ -40,7 +40,7 @@
             @foreach($alerts as $alert)
             <tr>
               <td>{{ $alert->name }}</td>
-              <td>{{ $alert->date->format('Y年m月d日') }}</td>
+              <td>{{ $alert->date_or_type }}</td>
               <td>{{ $alert->time->format('G:i') }}</td>
               <td>{{ $alert->first_alert_timing->format('G時i分前') }}</td>
               <td>{{ $alert->second_alert_flag ? "はい":"いいえ" }}</td>
