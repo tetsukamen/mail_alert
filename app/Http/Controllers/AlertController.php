@@ -30,6 +30,13 @@ class AlertController extends Controller{
         $alert->first_alert_timing = $request->first_alert_timing;
         $alert->second_alert_flag = $request->has('second_alert_flag');
         $alert->second_alert_timing = $request->second_alert_timing;
+        $alert->week_mon = !!($request->week_mon);
+        $alert->week_tue = !!($request->week_tue);
+        $alert->week_wed = !!($request->week_wed);
+        $alert->week_thu = !!($request->week_thu);
+        $alert->week_fri = !!($request->week_fri);
+        $alert->week_sat = !!($request->week_sat);
+        $alert->week_sun = !!($request->week_sun);
 
         $type = $request->type;
         if($type=='date'){
@@ -40,11 +47,27 @@ class AlertController extends Controller{
             $alert->date_or_type = 'DayOfWeek';
         };
 
+        // $alert->mute_dates()->createMany([
+
+        // ])
+
+        $mute_dates[] = [];
+
+        for($i=1;$i<=10;$i++){
+            $number = strval(str_pad($i, 2, 0, STR_PAD_LEFT));
+            $prop_name = 'mute_date_'.$number;
+            $val = $request[$prop_name];
+            if(!!$val){
+                $mute_dates[] = $val;
+            }
+        }
+
+
         $alert->save();
 
         // return redirect()->route('alert.index');
         return view('alerts/test', [
-            'request' => $request->date,
+            'request' => $mute_dates,
         ]); 
     }
 }

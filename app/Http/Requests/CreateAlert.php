@@ -25,7 +25,6 @@ class CreateAlert extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            'date' => 'required',
             'time' => 'required|date_format:"H:i"',
             'email_amount' => 'required|digits_between:1,10',
             'first_alert_timing' => 'required|date_format:"H:i"',
@@ -38,7 +37,6 @@ class CreateAlert extends FormRequest
     {
         return [
             'name' => '予定名',
-            'date' => '予定日付',
             'time' => '予定時刻',
             'email_amount' => 'メール数',
             'first_alert_timing' => '１回目のメールを送るタイミング',
@@ -52,9 +50,6 @@ class CreateAlert extends FormRequest
         return [
             'name.required' => ':attribute は入力必須です。',
             'name.max' => ':attribute は50文字以内で入力してください。',
-            'date.required' => ':attribute は入力必須です。',
-            'date.date' => ':attribute は入力形式が無効です。',
-            'date.after_or_equal' => ':attribute は今日以降を入力してください',
             'time.required' => ':attribute は入力必須です。',
             'time.date_format' => ':attribute は入力形式が無効です。',
             'email_amount.required' => ':attribute は入力必須です。',

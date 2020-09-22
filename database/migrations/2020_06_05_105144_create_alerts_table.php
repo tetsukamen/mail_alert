@@ -17,6 +17,13 @@ class CreateAlertsTable extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('date_or_type');
+            $table->boolean('week_mon');
+            $table->boolean('week_tue');
+            $table->boolean('week_wed');
+            $table->boolean('week_thu');
+            $table->boolean('week_fri');
+            $table->boolean('week_sat');
+            $table->boolean('week_sun');
             $table->time('time');
             $table->integer('email_amount');
             $table->integer('user_id');

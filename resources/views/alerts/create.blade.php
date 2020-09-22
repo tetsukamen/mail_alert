@@ -92,8 +92,17 @@
                 <input type="text" class="form-control" name="second_alert_timing" id="second_alert_timing" />
               </div>
               <div class="form-group">
-                <label for="mute_date">鳴らさない日</label>
-                <input type="text" class="form-control" name="mute_date" id="mute_date" />
+                <label >鳴らさない日</label>
+                <input type="text" class="form-control" name="mute_date_01" id="mute_date_01" />
+                <input type="text" class="form-control" name="mute_date_02" id="mute_date_02" />
+                <input type="text" class="form-control" name="mute_date_03" id="mute_date_03" />
+                <input type="text" class="form-control" name="mute_date_04" id="mute_date_04" />
+                <input type="text" class="form-control" name="mute_date_05" id="mute_date_05" />
+                <input type="text" class="form-control" name="mute_date_06" id="mute_date_06" />
+                <input type="text" class="form-control" name="mute_date_07" id="mute_date_07" />
+                <input type="text" class="form-control" name="mute_date_08" id="mute_date_08" />
+                <input type="text" class="form-control" name="mute_date_09" id="mute_date_09" />
+                <input type="text" class="form-control" name="mute_date_10" id="mute_date_10" />
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">送信</button>
@@ -145,7 +154,52 @@
       minDate: "0:00", // 時間の下限
       maxDate: "23:59" // 時間の上限
   });
-  flatpickr(document.getElementById('mute_date'), {
+  flatpickr(document.getElementById('mute_date_01'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_02'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_03'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_04'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_05'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_06'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_07'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_08'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_09'), {
+    locale: 'ja',
+    dateFormat: "Y/m/d",
+    minDate: new Date()
+  });
+  flatpickr(document.getElementById('mute_date_10'), {
     locale: 'ja',
     dateFormat: "Y/m/d",
     minDate: new Date()

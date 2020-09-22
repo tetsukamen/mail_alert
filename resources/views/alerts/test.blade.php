@@ -15,7 +15,7 @@
 </header>
 <main>
   <div class="container">
-    {{ urldecode($request) }}
+    {{ var_dump($request) }}
   </div>
 </main>
 </body>
