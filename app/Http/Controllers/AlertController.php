@@ -47,27 +47,24 @@ class AlertController extends Controller{
             $alert->date_or_type = 'DayOfWeek';
         };
 
-        // $alert->mute_dates()->createMany([
+        $alert->save();
 
-        // ])
-
-        $mute_dates[] = [];
-
+        $mute_dates = null;
         for($i=1;$i<=10;$i++){
             $number = strval(str_pad($i, 2, 0, STR_PAD_LEFT));
             $prop_name = 'mute_date_'.$number;
             $val = $request[$prop_name];
+            $val_arr = [
+                'mute_date' => $val
+            ];
             if(!!$val){
-                $mute_dates[] = $val;
+                $mute_dates[] = $val_arr;
             }
         }
-
-
-        $alert->save();
-
-        // return redirect()->route('alert.index');
-        return view('alerts/test', [
-            'request' => $mute_dates,
-        ]); 
+        if(!!$mute_dates){
+            $alert->mute_dates()->createMany($mute_dates);    
+        }
+        
+        return redirect()->route('alert.index');
     }
 }
