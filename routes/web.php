@@ -17,3 +17,6 @@ Route::get('/alert','AlertController@index')->name('alert.index') ;
 
 Route::get('/alert/create', 'AlertController@showCreateForm')->name('alert.create');
 Route::post('/alert/create', 'AlertController@create');
+
+Route::get('/alert/{id}/edit', 'AlertController@showEditForm')->name('alert.edit');
+Route::post('/alert/{id}/edit', 'AlertController@edit');

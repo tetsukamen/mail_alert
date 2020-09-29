@@ -67,4 +67,16 @@ class AlertController extends Controller{
         
         return redirect()->route('alert.index');
     }
+
+    public function showEditForm(int $id){
+        $alert = Alert::find($id);
+
+        return view('alerts/edit',[
+            'alert' => $alert,
+        ]);
+    }
+
+    public function edit(CreateAlert $request){
+        return redirect()->route('alert.index');
+    }
 }

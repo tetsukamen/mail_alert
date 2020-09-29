@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
         <nav class="panel panel-default">
-          <div class="panel-heading">予定を追加する</div>
+          <div class="panel-heading">予定を編集する</div>
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
@@ -35,7 +35,7 @@
               @csrf
               <div class="form-group">
                 <label for="name">予定名</label>
-                <input type="text" class="form-control" name="name" id="name" />
+                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') ?? $alert->name }}" />
               </div>
               <div class="form-group">
                 <label for="type">予定種別</label>
@@ -123,13 +123,12 @@
 
 <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
-<script>
+<!-- <script>
   flatpickr(document.getElementById('date'), {
     locale: 'ja',
     dateFormat: "Y/m/d",
     minDate: new Date()
   });
-  // flatpickr.localize(flatpickr.l10ns.ja);
   flatpickr(document.getElementById('time'), {
       noCalendar: true,
       enableTime: true,
@@ -210,7 +209,7 @@
     dateFormat: "Y/m/d",
     minDate: new Date()
   });
-</script>
+</script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
