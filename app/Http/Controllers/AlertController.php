@@ -71,9 +71,29 @@ class AlertController extends Controller{
     public function showEditForm(int $id){
         $alert = Alert::find($id);
 
+        $date_or_type = $alert->date_or_type; // DBから取得したdate_or_typeの値を得て、$date_or_typeに代入
+        $type = null; // $type変数を作っておく
+        $date = null; // $dateを作っておく
+        
+        if($date_or_type=='everyday'){ // $date_or_typeがeveryday->$type='everyday'
+            $type='everyday';
+        } elseif ($date_or_type=='DayOfWeek') { // $date_or_typeがDayOfWeek->$type='day_of_week'
+            $type='day_of_week';
+        } else{ // $date_or_typeが日付->$type='date'
+            $type='date';
+            $date = $date_or_type; // $type=='date'のとき、$date=$date_or_type
+        }
+        
+
         return view('alerts/edit',[
             'alert' => $alert,
+            'type' => $type, // テンプレートに$typeを渡す
+            'date' => $date, // テンプレートに$dateを渡す
         ]);
+
+        // return view('alerts/test',[
+        //     'request' => $type,
+        // ]);
     }
 
     public function edit(CreateAlert $request){

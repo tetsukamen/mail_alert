@@ -40,56 +40,56 @@
               <div class="form-group">
                 <label for="type">予定種別</label>
                 <select class="form-control" name="type" id="type">
-                  <option value="date">日付</option>
-                  <option value="everyday">毎日</option>
-                  <option value="day_of_week">曜日</option>
+                  <option value="date" @if($type=='date') selected  @endif>日付</option>
+                  <option value="everyday" @if($type=='everyday') selected  @endif>毎日</option>
+                  <option value="day_of_week" @if($type=='day_of_week') selected  @endif>曜日</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="date">予定日付</label>
-                <input type="text" class="form-control" name="date" id="date" />
+                <input type="text" class="form-control" name="date" id="date" value="{{ old('date') ?? $date }}"/>
               </div>
               <div class="form-group">
                 <label for="date">曜日</label>
                 <div class="d-flex">
                   <label for="week_mon">月</label>
-                  <input type="checkbox" class="form-control" name="week_mon" id="week_mon" value="1" />
+                  {{Form::checkbox('week_mon',1,old('date') ?? $alert->week_mon,['class'=>'form-control','id'=>'week_mon'])}}
                   <label for="week_tue">火</label>
-                  <input type="checkbox" class="form-control" name="week_tue" id="week_tue" value="1" />
+                  {{Form::checkbox('week_tue',1,old('date') ?? $alert->week_tue,['class'=>'form-control','id'=>'week_tue'])}}
                   <label for="week_wed">水</label>
-                  <input type="checkbox" class="form-control" name="week_wed" id="week_wed" value="1" />
+                  {{Form::checkbox('week_wed',1,old('date') ?? $alert->week_wed,['class'=>'form-control','id'=>'week_wed'])}}
                   <label for="week_thu">木</label>
-                  <input type="checkbox" class="form-control" name="week_thu" id="week_thu" value="1" />
+                  {{Form::checkbox('week_thu',1,old('date') ?? $alert->week_thu,['class'=>'form-control','id'=>'week_thu'])}}
                   <label for="week_fri">金</label>
-                  <input type="checkbox" class="form-control" name="week_fri" id="week_fri" value="1" />
+                  {{Form::checkbox('week_fri',1,old('date') ?? $alert->week_fri,['class'=>'form-control','id'=>'week_fri'])}}
                   <label for="week_sat">土</label>
-                  <input type="checkbox" class="form-control" name="week_sat" id="week_sat" value="1" />
+                  {{Form::checkbox('week_sat',1,old('date') ?? $alert->week_sat,['class'=>'form-control','id'=>'week_sat'])}}
                   <label for="week_sun">日</label>
-                  <input type="checkbox" class="form-control" name="week_sun" id="week_sun" value="1" />
+                  {{Form::checkbox('week_sun',1,old('date') ?? $alert->week_sun,['class'=>'form-control','id'=>'week_sun'])}}
                 </div>
               </div>
               <div class="form-group">
                 <label for="time">予定時刻</label>
-                <input type="text" class="form-control" name="time" id="time" />
+                <input type="text" class="form-control" name="time" id="time" value="{{ old('time') ?? $alert->time->format('H:i') }}"/>
               </div>
               <div class="form-group">
                 <label for="email_amount">メール数</label>
-                <input type="number" class="form-control" name="email_amount" id="email_amount" />
+                <input type="number" class="form-control" name="email_amount" id="email_amount" value="{{ old('email_amount') ?? $alert->email_amount }}"/>
               </div>
               <div class="form-group">
                 <label for="first_alert_timing">１回目のメールを送るタイミング</label>
-                <input type="text" class="form-control" name="first_alert_timing" id="first_alert_timing" />
+                <input type="text" class="form-control" name="first_alert_timing" id="first_alert_timing" value="{{ old('first_alert_timing') ?? $alert->first_alert_timing->format('H:i') }}"/>
               </div>
               <div class="form-group">
                 <label for="second_alert_flag">２回目のメールを送るかどうか</label>
                 <div class="d-flex">
-                  <input type="checkbox" class="" name="second_alert_flag" id="second_alert_flag" value="1" />
+                  {{Form::checkbox('second_alert_flag',1,old('second_alert_flag') ?? $alert->second_alert_flag,['id'=>'second_alert_flag'])}}
                   <label for="second_alert_flag">送る</label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="second_alert_timing">２回目のメールを送るタイミング</label>
-                <input type="text" class="form-control" name="second_alert_timing" id="second_alert_timing" />
+                <input type="text" class="form-control" name="second_alert_timing" id="second_alert_timing" value="{{ old('second_alert_timing') ?? $alert->second_alert_timing->format('H:i') }}"/>
               </div>
               <p>
                 <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
