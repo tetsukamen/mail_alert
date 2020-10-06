@@ -89,7 +89,7 @@
               </div>
               <div class="form-group">
                 <label for="second_alert_timing">２回目のメールを送るタイミング</label>
-                <input type="text" class="form-control" name="second_alert_timing" id="second_alert_timing" value="{{ old('second_alert_timing') ?? $alert->second_alert_timing->format('H:i') }}"/>
+                <input type="text" class="form-control" name="second_alert_timing" id="second_alert_timing" value="{{ old('second_alert_timing') ?? $alert->second_alert_timing ? $alert->second_alert_timing->format('H:i'):'' }}"/>
               </div>
               <p>
                 <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -98,16 +98,16 @@
               </p>
               <div class="collapse" id="collapseExample">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="mute_date_01" id="mute_date_01" />
-                  <input type="text" class="form-control" name="mute_date_02" id="mute_date_02" />
-                  <input type="text" class="form-control" name="mute_date_03" id="mute_date_03" />
-                  <input type="text" class="form-control" name="mute_date_04" id="mute_date_04" />
-                  <input type="text" class="form-control" name="mute_date_05" id="mute_date_05" />
-                  <input type="text" class="form-control" name="mute_date_06" id="mute_date_06" />
-                  <input type="text" class="form-control" name="mute_date_07" id="mute_date_07" />
-                  <input type="text" class="form-control" name="mute_date_08" id="mute_date_08" />
-                  <input type="text" class="form-control" name="mute_date_09" id="mute_date_09" />
-                  <input type="text" class="form-control" name="mute_date_10" id="mute_date_10" />
+                  <input type="text" class="form-control" name="mute_date_01" id="mute_date_01" value="{{ old('mute_date_01') ?? $alert->mute_date_01 ? $alert->mute_date_01->format('Y/m/d') : '' }}"/>
+                  <input type="text" class="form-control" name="mute_date_02" id="mute_date_02" value="{{ old('mute_date_02') ?? $alert->mute_date_02 ? $alert->mute_date_02->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_03" id="mute_date_03" value="{{ old('mute_date_03') ?? $alert->mute_date_03 ? $alert->mute_date_03->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_04" id="mute_date_04" value="{{ old('mute_date_04') ?? $alert->mute_date_04 ? $alert->mute_date_04->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_05" id="mute_date_05" value="{{ old('mute_date_05') ?? $alert->mute_date_05 ? $alert->mute_date_05->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_06" id="mute_date_06" value="{{ old('mute_date_06') ?? $alert->mute_date_06 ? $alert->mute_date_06->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_07" id="mute_date_07" value="{{ old('mute_date_07') ?? $alert->mute_date_07 ? $alert->mute_date_07->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_08" id="mute_date_08" value="{{ old('mute_date_08') ?? $alert->mute_date_08 ? $alert->mute_date_08->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_09" id="mute_date_09" value="{{ old('mute_date_09') ?? $alert->mute_date_09 ? $alert->mute_date_09->format('Y/m/d') : '' }}" />
+                  <input type="text" class="form-control" name="mute_date_10" id="mute_date_10" value="{{ old('mute_date_10') ?? $alert->mute_date_10 ? $alert->mute_date_10->format('Y/m/d') : '' }}" />
                 </div>
               </div>
               <div class="text-right">
@@ -123,7 +123,7 @@
 
 <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
-<!-- <script>
+<script>
   flatpickr(document.getElementById('date'), {
     locale: 'ja',
     dateFormat: "Y/m/d",
@@ -209,7 +209,7 @@
     dateFormat: "Y/m/d",
     minDate: new Date()
   });
-</script> -->
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
