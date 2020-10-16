@@ -20,3 +20,8 @@ Route::post('/alert/create', 'AlertController@create');
 
 Route::get('/alert/{id}/edit', 'AlertController@showEditForm')->name('alert.edit');
 Route::post('/alert/{id}/edit', 'AlertController@edit');
+
+Route::get('/alert/{id}/delete', 'AlertController@showDeleteForm')->name('alert.delete');
+Route::post('/alert/{id}/delete', 'AlertController@delete');
+
+Route::get('/alert/{id}/sendmail', 'AlertController@sendMail')->name('alert.sendMail');

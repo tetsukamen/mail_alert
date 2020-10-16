@@ -6,6 +6,8 @@ use App\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateAlert;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AlertMail;
 
 class AlertController extends Controller{
     public function index(){
@@ -135,24 +137,48 @@ class AlertController extends Controller{
 
         $alert->save();
 
-        // $alert->mute_dates()->delete();
-
-        // $mute_dates = null;
-        // for($i=1;$i<=10;$i++){
-        //     $number = strval(str_pad($i, 2, 0, STR_PAD_LEFT));
-        //     $prop_name = 'mute_date_'.$number;
-        //     $val = $request[$prop_name];
-        //     $val_arr = [
-        //         'mute_date' => $val
-        //     ];
-        //     if(!!$val){
-        //         $mute_dates[] = $val_arr;
-        //     }
-        // }
-        // if(!!$mute_dates){
-        //     $alert->mute_dates()->createMany($mute_dates);    
-        // }
+        // 元々のmute_dateを全て削除
+        $mute_dates = $alert->mute_dates()->get();
+        foreach($mute_dates as $mute_date){
+            $mute_date->delete();
+        }
+        // 改めてmute_dateを登録する
+        $mute_dates = null;
+        for($i=1;$i<=10;$i++){
+            $number = strval(str_pad($i, 2, 0, STR_PAD_LEFT));
+            $prop_name = 'mute_date_'.$number;
+            $val = $request[$prop_name];
+            $val_arr = [
+                'mute_date' => $val
+            ];
+            if(!!$val){
+                $mute_dates[] = $val_arr;
+            }
+        }
+        if(!!$mute_dates){
+            $alert->mute_dates()->createMany($mute_dates);    
+        }
 
         return redirect()->route('alert.index');
+    }
+
+    public function showDeleteForm(int $id){
+        $alert = Alert::find($id);
+
+        return view('alerts/delete',[
+            'alert' => $alert,
+        ]);
+    }
+
+    public function delete(int $id){
+        $alert = Alert::find($id);
+        $alert->delete();
+
+        return redirect()->route('alert.index');
+    }
+
+    public function sendMail(int $id){
+        Mail::to('tetsukamen00@gmail.com')
+            ->send(new AlertMail());
     }
 }

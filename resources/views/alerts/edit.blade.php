@@ -18,7 +18,7 @@
 <main>
   <div class="container">
     <div class="row">
-      <div class="col col-md-offset-3 col-md-6">
+      <div class="col col-12">
         <nav class="panel panel-default">
           <div class="panel-heading">予定を編集する</div>
           <div class="panel-body">
@@ -31,7 +31,7 @@
                 </ul>
               </div>
             @endif
-            <form action="{{ route('alert.create') }}" method="post">
+            <form action="{{ route('alert.edit', ['id'=>$alert->id]) }}" method="post">
               @csrf
               <div class="form-group">
                 <label for="name">予定名</label>

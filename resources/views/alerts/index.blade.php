@@ -35,6 +35,7 @@
             <th>鳴らさない日</th>
             <th></th>
             <th></th>
+            <th></th>
           </thead>
           <tbody>
             @foreach($alerts as $alert)
@@ -51,8 +52,9 @@
                 {{ $mute_date->mute_date->format('Y年m月d日') }}<br>
               @endforeach
               </td>
-              <td><a href="">編集</a></td>
-              <td><a href="">削除</a></td>
+              <td><a href="{{ route('alert.edit', ['id'=>$alert->id]) }}">編集</a></td>
+              <td><a href="{{ route('alert.delete', ['id'=>$alert->id]) }}">削除</a></td>
+              <td><a href="{{ route('alert.sendMail', ['id'=>$alert->id]) }}">メール送信</a></td>
             </tr>
             @endforeach
           </tbody>
