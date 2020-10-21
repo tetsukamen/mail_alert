@@ -178,7 +178,8 @@ class AlertController extends Controller{
     }
 
     public function sendMail(int $id){
+        $alert = Alert::find($id);
         Mail::to('tetsukamen00@gmail.com')
-            ->send(new AlertMail());
+            ->send(new AlertMail($alert));
     }
 }
