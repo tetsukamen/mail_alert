@@ -1,5 +1,5 @@
-{{ $alert->name }}　{{ $alert->first_alert_timing->format('G時i分前') }}になりました。
+{{ $alert->name }} <br><br>
 
-{{ $alert->date_or_type }} {{ $alert->time->format('G:i') }}から{{ $alert->name }}です。
+予定の{{ $alert->first_alert_timing->format('G時間i分前') }}になりました。<br><br>
 
-{{ $first_alert_timing }}
+{{ $start_date }} {{ $alert->time->format('G:i') }}から{{ $alert->name }}の予定があります。<br><br>
