@@ -10,7 +10,7 @@
 <body>
 <header>
   <nav class="my-navbar">
-    <a class="my-navbar-brand" href="/">Mail Alert</a>
+    <a class="my-navbar-brand" href="{{ route('alert.index') }}">Mail Alert</a>
   </nav>
 </header>
 <main>
