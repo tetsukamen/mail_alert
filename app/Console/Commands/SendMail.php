@@ -41,37 +41,76 @@ class SendMail extends Command
      */
     public function handle()
     {
-        $dt = Carbon::now('Asia/Tokyo'); // 現在時間を取得
-        $dt_15after = Carbon::now('Asia/Tokyo');
-        $dt_15after->addMinutes(15); // 現在から15分後の時間
+        $dayOfWeekDict = [ // idxと曜日の対応づけ
+            0 => 'week_sun',
+            1 => 'week_mon',
+            2 => 'week_tue',
+            3 => 'week_wed',
+            4 => 'week_thu',
+            5 => 'week_fri',
+            6 => 'week_sat',
+        ];
         $alerts = Alert::all(); // すべてのアラートを取得する
         foreach($alerts as $alert){ // 各アラートについて送信時間を計算し、今送るものならば送信する
-            // 1回目のメールを送る時間を計算する
-            // アラート日付の取得
-            $scheduled_date = $alert->date_or_type;
-            if($scheduled_date=='everyday'){
-                
-            }elseif($scheduled_date=='DayOfWeek'){
-
-            }else{ // 日付の場合
-                $send_date_dt = Carbon::create($scheduled_date, 'Asia/Tokyo');
-            }
-            // アラート時間の取得
-            $send_time_dt = Carbon::parse($alert->time);
-            // アラート日時の設定
-            $send_date_dt->hour = $send_time_dt->hour;
-            $send_date_dt->minute = $send_time_dt->minute; // アラートを設定した時間が格納されている
-            // first_alert_timingの首藤
+            
+            // first_alert_timingの取得
             $first_alert_timing = Carbon::parse($alert->first_alert_timing);
-            // first_alert_timingの時間分だけ時間を巻き戻す
-            $send_date_dt->subHours($first_alert_timing->hour);
-            $send_date_dt->subMinutes($first_alert_timing->minute); // メールを送る時間が格納されている
-            // $send_date_dtが現在時間から15分後までの間かどうかを判定　条件：$dt<=$send_date_dt<$dt_15after
-            if($dt <= $send_date_dt && $send_date_dt < $dt_15after){
-                // 条件を満たしていればメールを送信する
-                Mail::to('tetsukamen00@gmail.com')
-                ->send(new AlertMail($alert));
+            // 現在時間を取得
+            $dt = Carbon::now('Asia/Tokyo');
+            // $dtをfirst_alert_timingの時間分だけ進める
+            $dt->addHours($first_alert_timing->hour);
+            $dt->addMinutes($first_alert_timing->minute);
+
+            $scheduled_date = $alert->date_or_type; // アラート日付の取得
+            // date_or_typeによって場合わけする
+            if($scheduled_date=='everyday'){
+                $send_date_dt=$dt->copy();
+                $send_time_dt = Carbon::parse($alert->time); // アラート時間の取得
+                $send_date_dt->hour = $send_time_dt->hour;
+                $send_date_dt->minute = $send_time_dt->minute; // $dtと同じ日付で$alertの時間
+                $send_date_dt_15before = $send_date_dt->copy();
+                $send_date_dt_15before->subMinutes(15);
+                // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dt
+                if($send_date_dt_15before < $dt && $dt <= $send_date_dt){
+                    // 条件を満たしていればメールを送信する
+                    Mail::to('tetsukamen00@gmail.com')
+                    ->send(new AlertMail($alert));
+                }
+            }elseif($scheduled_date=='DayOfWeek'){
+                $send_date_dt=$dt->copy();
+                $send_time_dt = Carbon::parse($alert->time); // アラート時間の取得
+                $send_date_dt->hour = $send_time_dt->hour;
+                $send_date_dt->minute = $send_time_dt->minute; // $dtと同じ日付で$alertの時間
+                $send_date_dt_15before = $send_date_dt->copy();
+                $send_date_dt_15before->subMinutes(15);
+                // 曜日のチェック
+                $dayOfWeekIdx = $send_date_dt->dayOfWeek; // $send_date_dtの曜日を取得する
+                $weekName = $dayOfWeekDict[$dayOfWeekIdx]; // 曜日のstring取得
+                // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dtかつ曜日条件を満たしている
+                if($send_date_dt_15before < $dt && $dt <= $send_date_dt && $alert[$weekName]){
+                    // 条件を満たしていればメールを送信する
+                    Mail::to('tetsukamen00@gmail.com')
+                    ->send(new AlertMail($alert));
+                }
+            }else{ // 日付の場合
+                $send_date_dt = Carbon::create($scheduled_date, 'Asia/Tokyo'); // アラート日付の取得
+                $send_time_dt = Carbon::parse($alert->time); // アラート時間の取得
+                // アラート日時の設定
+                $send_date_dt->hour = $send_time_dt->hour;
+                $send_date_dt->minute = $send_time_dt->minute; // アラートを設定した時間が格納されている
+                // アラート日時の１５分前のdt
+                $send_date_dt_15before = $send_date_dt->copy();
+                $send_date_dt_15before->subMinutes(15);
+                // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dt
+                if($send_date_dt_15before < $dt && $dt <= $send_date_dt){
+                    // 条件を満たしていればメールを送信する
+                    Mail::to('tetsukamen00@gmail.com')
+                    ->send(new AlertMail($alert));
+                }
             }
+            // logger()->info($send_date_dt_15before);
+            // logger()->info($dt);
+            // logger()->info($send_date_dt);
         }
     }
 }
