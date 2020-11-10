@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+Route::get('/', 'AlertController@index');
 Route::get('/alert','AlertController@index')->name('alert.index') ;
 
 Route::get('/alert/create', 'AlertController@showCreateForm')->name('alert.create');
@@ -25,3 +28,6 @@ Route::get('/alert/{id}/delete', 'AlertController@showDeleteForm')->name('alert.
 Route::post('/alert/{id}/delete', 'AlertController@delete');
 
 Route::get('/alert/{id}/sendmail', 'AlertController@sendMail')->name('alert.sendMail');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

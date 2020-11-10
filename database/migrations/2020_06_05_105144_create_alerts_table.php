@@ -26,7 +26,8 @@ class CreateAlertsTable extends Migration
             $table->boolean('week_sun');
             $table->time('time');
             $table->integer('email_amount');
-            $table->integer('user_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->time('first_alert_timing');
             $table->boolean('second_alert_flag');
             $table->time('second_alert_timing')->nullable();
