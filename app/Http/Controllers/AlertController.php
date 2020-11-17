@@ -11,7 +11,7 @@ use App\Mail\AlertMail;
 
 class AlertController extends Controller{
     public function index(){
-        $alerts = Alert::all();
+        $alerts = Auth::user()->alerts()->get();
 
         return view('alerts/index', [
             'alerts' => $alerts,
@@ -28,7 +28,6 @@ class AlertController extends Controller{
         $alert->name = $request->name;
         $alert->time = $request->time;
         $alert->email_amount = $request->email_amount;
-        $alert->user_id = 1;
         $alert->first_alert_timing = $request->first_alert_timing;
         $alert->second_alert_flag = $request->has('second_alert_flag');
         $alert->second_alert_timing = $request->second_alert_timing;
@@ -49,7 +48,7 @@ class AlertController extends Controller{
             $alert->date_or_type = 'DayOfWeek';
         };
 
-        $alert->save();
+        Auth::user()->alerts()->save($alert);
 
         $mute_dates = null;
         for($i=1;$i<=10;$i++){

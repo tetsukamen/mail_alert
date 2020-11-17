@@ -7,6 +7,7 @@ use App\Alert;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AlertMail;
 use Carbon\Carbon;
+use App\User;
 
 class SendMail extends Command
 {
@@ -73,7 +74,7 @@ class SendMail extends Command
                 // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dt
                 if($send_date_dt_15before < $dt && $dt <= $send_date_dt){
                     // 条件を満たしていればメールを送信する
-                    Mail::to('tetsukamen00@gmail.com')
+                    Mail::to(User::find($alert->user_id)->email)
                     ->send(new AlertMail($alert));
                 }
             }elseif($scheduled_date=='DayOfWeek'){
@@ -89,7 +90,7 @@ class SendMail extends Command
                 // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dtかつ曜日条件を満たしている
                 if($send_date_dt_15before < $dt && $dt <= $send_date_dt && $alert[$weekName]){
                     // 条件を満たしていればメールを送信する
-                    Mail::to('tetsukamen00@gmail.com')
+                    Mail::to(User::find($alert->user_id)->email)
                     ->send(new AlertMail($alert));
                 }
             }else{ // 日付の場合
@@ -104,13 +105,11 @@ class SendMail extends Command
                 // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dt
                 if($send_date_dt_15before < $dt && $dt <= $send_date_dt){
                     // 条件を満たしていればメールを送信する
-                    Mail::to('tetsukamen00@gmail.com')
+                    Mail::to(User::find($alert->user_id)->email)
                     ->send(new AlertMail($alert));
                 }
             }
-            // logger()->info($send_date_dt_15before);
-            // logger()->info($dt);
-            // logger()->info($send_date_dt);
+            // logger()->info();
         }
     }
 }

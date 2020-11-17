@@ -17,7 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div id="app">
@@ -43,5 +45,14 @@
             @yield('content')
         </main>
     </div>
+    @if(Auth::check())
+    <script>
+        document.getElementById('logout').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('logout-form').submit();
+        });
+    </script>
+    @endif
+    @yield('script')
 </body>
 </html>
