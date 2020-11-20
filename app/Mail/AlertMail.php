@@ -20,10 +20,12 @@ class AlertMail extends Mailable
      */
     protected $alert;
     protected $start_date;
+    protected $before_timing;
 
-    public function __construct($alert)
+    public function __construct($alert, $alert_timing)
     {
         $this->alert = $alert;
+        $this->before_timing = $alert_timing;
         $first_alert_timing = $alert->first_alert_timing;
 
         // 現在時間から何時間後の日付を計算
@@ -49,6 +51,7 @@ class AlertMail extends Mailable
             ->with([
                 'alert' => $this->alert,
                 'start_date' => $this->start_date,
+                'before_timing' => $this->before_timing,
             ]);
     }
 }

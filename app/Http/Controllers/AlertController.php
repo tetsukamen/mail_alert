@@ -113,7 +113,6 @@ class AlertController extends Controller{
         $alert->name = $request->name;
         $alert->time = $request->time;
         $alert->email_amount = $request->email_amount;
-        $alert->user_id = 1;
         $alert->first_alert_timing = $request->first_alert_timing;
         $alert->second_alert_flag = $request->has('second_alert_flag');
         $alert->second_alert_timing = $request->second_alert_timing;
@@ -134,7 +133,7 @@ class AlertController extends Controller{
             $alert->date_or_type = 'DayOfWeek';
         };
 
-        $alert->save();
+        Auth::user()->alerts()->save($alert);
 
         // 元々のmute_dateを全て削除
         $mute_dates = $alert->mute_dates()->get();
