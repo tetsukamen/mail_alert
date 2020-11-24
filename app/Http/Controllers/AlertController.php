@@ -72,6 +72,10 @@ class AlertController extends Controller{
     public function showEditForm(int $id){
         $alert = Alert::find($id);
 
+        if (is_null($alert)) {
+            abort(404);
+        }
+
         $date_or_type = $alert->date_or_type; // DBから取得したdate_or_typeの値を得て、$date_or_typeに代入
         $type = null; // $type変数を作っておく
         $date = null; // $dateを作っておく
@@ -101,14 +105,14 @@ class AlertController extends Controller{
             'type' => $type, // テンプレートに$typeを渡す
             'date' => $date, // テンプレートに$dateを渡す
         ]);
-
-        // return view('alerts/test',[
-        //     'request' => $alert,
-        // ]);
     }
 
     public function edit(int $id, CreateAlert $request){
         $alert = Alert::find($id);
+
+        if (is_null($alert)) {
+            abort(404);
+        }
 
         $alert->name = $request->name;
         $alert->time = $request->time;
@@ -163,6 +167,10 @@ class AlertController extends Controller{
     public function showDeleteForm(int $id){
         $alert = Alert::find($id);
 
+        if (is_null($alert)) {
+            abort(404);
+        }
+
         return view('alerts/delete',[
             'alert' => $alert,
         ]);
@@ -170,14 +178,13 @@ class AlertController extends Controller{
 
     public function delete(int $id){
         $alert = Alert::find($id);
+
+        if (is_null($alert)) {
+            abort(404);
+        }
+
         $alert->delete();
 
         return redirect()->route('alert.index');
-    }
-
-    public function sendMail(int $id){
-        $alert = Alert::find($id);
-        Mail::to('tetsukamen00@gmail.com')
-            ->send(new AlertMail($alert));
     }
 }

@@ -18,7 +18,7 @@ class CreateMuteDatesTable extends Migration
             $table->date('mute_date');
             $table->bigInteger('alert_id')->unsigned();
             $table->timestamps();
-            $table->foreign('alert_id')->references('id')->on('alerts');
+            $table->foreign('alert_id')->references('id')->on('alerts')->onDelete('cascade');;
         });
     }
 

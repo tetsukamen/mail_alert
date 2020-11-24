@@ -26,9 +26,6 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/alert/{id}/delete', 'AlertController@showDeleteForm')->name('alert.delete');
     Route::post('/alert/{id}/delete', 'AlertController@delete');
-
-    Route::get('/alert/{id}/sendmail', 'AlertController@sendMail')->name('alert.sendMail');
-
 });
 
 Auth::routes();
