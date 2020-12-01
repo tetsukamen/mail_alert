@@ -89,10 +89,10 @@ class SendMail extends Command
                 $send_time_dt = Carbon::parse($alert->time); // アラート時間の取得
                 $send_date_dt->hour = $send_time_dt->hour;
                 $send_date_dt->minute = $send_time_dt->minute; // $dtと同じ日付で$alertの時間
-                $send_date_dt_15before = $send_date_dt->copy();
-                $send_date_dt_15before->subMinutes(15);
-                // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dt
-                if($send_date_dt_15before < $dt && $dt <= $send_date_dt){
+                $send_date_dt_10before = $send_date_dt->copy();
+                $send_date_dt_10before->subMinutes(10);
+                // $dtが予定時間から10分後までの間かどうかを判定　条件：$send_date_dt_10before<$dt<=$send_date_dt
+                if($send_date_dt_10before < $dt && $dt <= $send_date_dt){
                     // 条件を満たしていればメールを送信する
                     for($i=0;$i<$alert->email_amount;$i++){
                         Mail::to(User::find($alert->user_id)->email)->send(new AlertMail($alert,$alert_timing));
@@ -103,13 +103,13 @@ class SendMail extends Command
                 $send_time_dt = Carbon::parse($alert->time); // アラート時間の取得
                 $send_date_dt->hour = $send_time_dt->hour;
                 $send_date_dt->minute = $send_time_dt->minute; // $dtと同じ日付で$alertの時間
-                $send_date_dt_15before = $send_date_dt->copy();
-                $send_date_dt_15before->subMinutes(15);
+                $send_date_dt_10before = $send_date_dt->copy();
+                $send_date_dt_10before->subMinutes(10);
                 // 曜日のチェック
                 $dayOfWeekIdx = $send_date_dt->dayOfWeek; // $send_date_dtの曜日を取得する
                 $weekName = $this->dayOfWeekDict[$dayOfWeekIdx]; // 曜日のstring取得
-                // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dtかつ曜日条件を満たしている
-                if($send_date_dt_15before < $dt && $dt <= $send_date_dt && $alert[$weekName]){
+                // $dtが予定時間から10分後までの間かどうかを判定　条件：$send_date_dt_10before<$dt<=$send_date_dtかつ曜日条件を満たしている
+                if($send_date_dt_10before < $dt && $dt <= $send_date_dt && $alert[$weekName]){
                     // 条件を満たしていればメールを送信する
                     for($i=0;$i<$alert->email_amount;$i++){
                         Mail::to(User::find($alert->user_id)->email)->send(new AlertMail($alert,$alert_timing));
@@ -121,11 +121,11 @@ class SendMail extends Command
                 // アラート日時の設定
                 $send_date_dt->hour = $send_time_dt->hour;
                 $send_date_dt->minute = $send_time_dt->minute; // アラートを設定した時間が格納されている
-                // アラート日時の１５分前のdt
-                $send_date_dt_15before = $send_date_dt->copy();
-                $send_date_dt_15before->subMinutes(15);
-                // $dtが予定時間から15分後までの間かどうかを判定　条件：$send_date_dt_15before<$dt<=$send_date_dt
-                if($send_date_dt_15before < $dt && $dt <= $send_date_dt){
+                // アラート日時の10分前のdt
+                $send_date_dt_10before = $send_date_dt->copy();
+                $send_date_dt_10before->subMinutes(10);
+                // $dtが予定時間から10分後までの間かどうかを判定　条件：$send_date_dt_10before<$dt<=$send_date_dt
+                if($send_date_dt_10before < $dt && $dt <= $send_date_dt){
                     // 条件を満たしていればメールを送信する
                     for($i=0;$i<$alert->email_amount;$i++){
                         Mail::to(User::find($alert->user_id)->email)->send(new AlertMail($alert,$alert_timing));
